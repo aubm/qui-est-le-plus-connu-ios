@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0336AD6F1DBB9A9B002C0F7F /* CelebrityDuet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0336AD6E1DBB9A9B002C0F7F /* CelebrityDuet.swift */; };
+		039772881DBB9D1D00F94EF0 /* AppProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039772871DBB9D1D00F94EF0 /* AppProvider.swift */; };
+		0397728A1DBBAFF300F94EF0 /* VoterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039772891DBBAFF300F94EF0 /* VoterDelegate.swift */; };
 		03FD48C81DBB894000A6A388 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FD48C71DBB894000A6A388 /* AppDelegate.swift */; };
 		03FD48CA1DBB894000A6A388 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FD48C91DBB894000A6A388 /* ViewController.swift */; };
 		03FD48CD1DBB894000A6A388 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03FD48CB1DBB894000A6A388 /* Main.storyboard */; };
@@ -14,6 +17,7 @@
 		03FD48D21DBB894000A6A388 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03FD48D01DBB894000A6A388 /* LaunchScreen.storyboard */; };
 		03FD48DD1DBB894000A6A388 /* qui_est_le_plus_connu_iosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FD48DC1DBB894000A6A388 /* qui_est_le_plus_connu_iosTests.swift */; };
 		03FD48E81DBB894000A6A388 /* qui_est_le_plus_connu_iosUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FD48E71DBB894000A6A388 /* qui_est_le_plus_connu_iosUITests.swift */; };
+		03FD48F61DBB95FF00A6A388 /* CelebritiesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FD48F51DBB95FF00A6A388 /* CelebritiesService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +38,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0336AD6E1DBB9A9B002C0F7F /* CelebrityDuet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CelebrityDuet.swift; path = Celebrities/CelebrityDuet.swift; sourceTree = "<group>"; };
+		039772871DBB9D1D00F94EF0 /* AppProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppProvider.swift; sourceTree = "<group>"; };
+		039772891DBBAFF300F94EF0 /* VoterDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VoterDelegate.swift; path = Celebrities/VoterDelegate.swift; sourceTree = "<group>"; };
 		03FD48C41DBB894000A6A388 /* qui-est-le-plus-connu-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "qui-est-le-plus-connu-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		03FD48C71DBB894000A6A388 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		03FD48C91DBB894000A6A388 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -47,6 +54,7 @@
 		03FD48E31DBB894000A6A388 /* qui-est-le-plus-connu-iosUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "qui-est-le-plus-connu-iosUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		03FD48E71DBB894000A6A388 /* qui_est_le_plus_connu_iosUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = qui_est_le_plus_connu_iosUITests.swift; sourceTree = "<group>"; };
 		03FD48E91DBB894000A6A388 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		03FD48F51DBB95FF00A6A388 /* CelebritiesService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CelebritiesService.swift; path = Celebrities/CelebritiesService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +82,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0336AD6D1DBB9897002C0F7F /* Celebrities */ = {
+			isa = PBXGroup;
+			children = (
+				03FD48F51DBB95FF00A6A388 /* CelebritiesService.swift */,
+				0336AD6E1DBB9A9B002C0F7F /* CelebrityDuet.swift */,
+				039772891DBBAFF300F94EF0 /* VoterDelegate.swift */,
+			);
+			name = Celebrities;
+			sourceTree = "<group>";
+		};
 		03FD48BB1DBB894000A6A388 = {
 			isa = PBXGroup;
 			children = (
@@ -97,12 +115,14 @@
 		03FD48C61DBB894000A6A388 /* qui-est-le-plus-connu-ios */ = {
 			isa = PBXGroup;
 			children = (
+				0336AD6D1DBB9897002C0F7F /* Celebrities */,
 				03FD48C71DBB894000A6A388 /* AppDelegate.swift */,
 				03FD48C91DBB894000A6A388 /* ViewController.swift */,
 				03FD48CB1DBB894000A6A388 /* Main.storyboard */,
 				03FD48CE1DBB894000A6A388 /* Assets.xcassets */,
 				03FD48D01DBB894000A6A388 /* LaunchScreen.storyboard */,
 				03FD48D31DBB894000A6A388 /* Info.plist */,
+				039772871DBB9D1D00F94EF0 /* AppProvider.swift */,
 			);
 			path = "qui-est-le-plus-connu-ios";
 			sourceTree = "<group>";
@@ -264,6 +284,10 @@
 			files = (
 				03FD48CA1DBB894000A6A388 /* ViewController.swift in Sources */,
 				03FD48C81DBB894000A6A388 /* AppDelegate.swift in Sources */,
+				03FD48F61DBB95FF00A6A388 /* CelebritiesService.swift in Sources */,
+				0397728A1DBBAFF300F94EF0 /* VoterDelegate.swift in Sources */,
+				0336AD6F1DBB9A9B002C0F7F /* CelebrityDuet.swift in Sources */,
+				039772881DBB9D1D00F94EF0 /* AppProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -514,6 +538,7 @@
 				03FD48EE1DBB894000A6A388 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		03FD48EF1DBB894000A6A388 /* Build configuration list for PBXNativeTarget "qui-est-le-plus-connu-iosTests" */ = {
 			isa = XCConfigurationList;
@@ -522,6 +547,7 @@
 				03FD48F11DBB894000A6A388 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		03FD48F21DBB894000A6A388 /* Build configuration list for PBXNativeTarget "qui-est-le-plus-connu-iosUITests" */ = {
 			isa = XCConfigurationList;
@@ -530,6 +556,7 @@
 				03FD48F41DBB894000A6A388 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
