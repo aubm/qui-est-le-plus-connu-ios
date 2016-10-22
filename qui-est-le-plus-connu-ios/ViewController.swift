@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController,VoterDelegate {
+class ViewController: UIViewController,VoterDelegate,CelebrityDuetProviderDelegate {
     
     let celebrityService = AppProvider.celebrityService()
     var duet: CelebrityDuet? = nil;
@@ -24,10 +24,7 @@ class ViewController: UIViewController,VoterDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        showFirstCelebrityImageLoader()
-        showSecondCelebrityImageLoader()
-        
-        initNewCelebrityDuet()
+        loadCelebrityDuet()
     }
 
     override func didReceiveMemoryWarning() {
@@ -35,21 +32,27 @@ class ViewController: UIViewController,VoterDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    func initNewCelebrityDuet() {
-        duet = celebrityService.newCelebrityDuet()
+    func loadCelebrityDuet() {
+        showFirstCelebrityImageLoader()
+        showSecondCelebrityImageLoader()
         
-        firstCelebrityName.text = duet!.firstCelebrity.name
-        secondCelebrityName.text = duet!.secondCelebrity.name
+        celebrityService.provideCelebrityDuet(delegate: self)
+    }
+    
+    func onNewCelebrityDuet(_duet: CelebrityDuet) {
+        duet = _duet
+        
+        DispatchQueue.main.async {
+            self.firstCelebrityName.text = self.duet!.firstCelebrity.name
+            self.secondCelebrityName.text = self.duet!.secondCelebrity.name
+        }
         
         firstCelebrityImage.downloadedFrom(link: duet!.firstCelebrity.imageUrl, callback: {
-            DispatchQueue.main.async {
-                self.hideFirstCelebrityImageLoader()
-            }
+            DispatchQueue.main.async { self.hideFirstCelebrityImageLoader() }
         })
+                
         secondCelebrityImage.downloadedFrom(link: duet!.secondCelebrity.imageUrl, callback: {
-            DispatchQueue.main.async {
-                self.hideSecondCelebrityImageLoader()
-            }
+            DispatchQueue.main.async { self.hideSecondCelebrityImageLoader() }
         })
     }
     
@@ -84,7 +87,7 @@ class ViewController: UIViewController,VoterDelegate {
     }
     
     func voteIsSubmitted() {
-        initNewCelebrityDuet()
+        loadCelebrityDuet()
     }
 }
 

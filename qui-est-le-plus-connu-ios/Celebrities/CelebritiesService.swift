@@ -10,15 +10,51 @@ import Foundation
 
 class CelebritiesService {
     
-    func newCelebrityDuet() -> CelebrityDuet {
-        return CelebrityDuet(
-            firstCelebrity: Celebrity(name: "Alexandre Astier", slug: "alexandre-astier", imageUrl: "https://pbs.twimg.com/profile_images/378800000730682848/4de6e7d44a5e2ef534875222796d94d2.jpeg"),
-            secondCelebrity: Celebrity(name: "Gérard Depardieu", slug: "gerard-depardieu", imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/G%C3%A9rard_Depardieu_Cannes_2010.jpg/220px-G%C3%A9rard_Depardieu_Cannes_2010.jpg")
-        )
+    func provideCelebrityDuet(delegate: CelebrityDuetProviderDelegate) {
+        loadCelebrities { (celebrities) in
+            let duet = self.newRandomCelebrityDuet(celebrities: celebrities)
+            delegate.onNewCelebrityDuet(_duet: duet)
+        }
     }
     
     func vote(duet: CelebrityDuet, choice: Celebrity, delegate: VoterDelegate) {
         delegate.voteIsSubmitted()
+    }
+    
+    private func loadCelebrities(callback: @escaping (Array<Celebrity>) -> Void) {
+        
+        let request = URLRequest(url: URL(string: "http://localhost:3000/celebrities")!)
+        let session = URLSession.shared
+        
+        session.dataTask(with: request) {data, response, err in
+            var celebrities = Array<Celebrity>()
+            
+            defer { callback(celebrities) }
+            
+            guard
+                let json = try? JSONSerialization.jsonObject(with: data!)
+                else { return }
+            for field in json as? [AnyObject] ?? [] {
+                let celeb = Celebrity(
+                    name: field["name"] as? String ?? "",
+                    slug: field["slug"] as? String ?? "",
+                    imageUrl: field["image_url"] as? String ?? ""
+                )
+                celebrities.append(celeb)
+            }
+        }.resume()
+        
+    }
+    
+    private func newRandomCelebrityDuet(celebrities: Array<Celebrity>) -> CelebrityDuet {
+        
+        let randInt1 = Int(arc4random_uniform(UInt32(celebrities.count)))
+        var randInt2: Int = 0;
+        repeat {
+            randInt2 = Int(arc4random_uniform(UInt32(celebrities.count)))
+        } while randInt1 == randInt2;
+        
+        return CelebrityDuet(firstCelebrity: celebrities[randInt1], secondCelebrity: celebrities[randInt2])
     }
     
 }
