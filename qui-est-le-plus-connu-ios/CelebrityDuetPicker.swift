@@ -9,6 +9,8 @@
 import Foundation
 import FirebaseDatabase
 
+let DUETS_NODE_NAME = "duets"
+
 protocol CelebrityDuetPicker {
     func pickRandomCelebrityDuet(_ callback: @escaping (CelebrityDuet?) -> Void, onError: @escaping (Error) -> Void)
 }
@@ -16,6 +18,7 @@ protocol CelebrityDuetPicker {
 class FirebaseCelebrityDuetPicker: CelebrityDuetPicker {
     
     let databaseReference: FIRDatabaseReference
+    var pickRandomCelebrityDuetCallback: ((CelebrityDuet?) -> Void)!
     
     
     init(databaseReference: FIRDatabaseReference) {
@@ -23,32 +26,45 @@ class FirebaseCelebrityDuetPicker: CelebrityDuetPicker {
     }
     
     func pickRandomCelebrityDuet(_ callback: @escaping (CelebrityDuet?) -> Void, onError: @escaping (Error) -> Void) {
-        guard let childIndex = newRandomUnvotedChildIndex() else {
-            callback(nil)
+        pickRandomCelebrityDuetCallback = callback
+        
+        guard let unvotedCelebrityDuetIndex = newRandomUnvotedCelebrityDuetIndex() else {
+            pickRandomCelebrityDuetCallback(nil)
             return
         }
-        databaseReference.child("duets").child(childIndex).observeSingleEvent(of: .value, with: { (snapshot) in
-            let celebrityDuet = self.buildCelebrityDuetFromDictionary(snapshot.value as! Dictionary)
-            callback(celebrityDuet)
+        
+        getOneCelebrityDuetFromDatabase(
+            withIndex: unvotedCelebrityDuetIndex,
+            onSuccess: provideCelebrityDuetToCaller,
+            onError: onError)
+    }
+    
+    private func newRandomUnvotedCelebrityDuetIndex() -> String? {
+        let randomNum = arc4random_uniform(6)
+        return String(randomNum)
+    }
+    
+    private func provideCelebrityDuetToCaller(celebrityDuetData: Dictionary<String, Any>) {
+        pickRandomCelebrityDuetCallback(buildCelebrityDuetFromDictionary(celebrityDuetData))
+    }
+    
+    private func getOneCelebrityDuetFromDatabase(withIndex: String, onSuccess: @escaping (Dictionary<String, Any>) -> Void, onError: @escaping (Error) -> Void) {
+        databaseReference.child(DUETS_NODE_NAME).child(withIndex).observeSingleEvent(of: .value, with: { snapshot in
+            onSuccess(snapshot.value as! Dictionary)
         }) { error in
             onError(error)
         }
     }
     
-    private func newRandomUnvotedChildIndex() -> String? {
-        let randomNum = arc4random_uniform(6)
-        return String(randomNum)
-    }
-    
     private func buildCelebrityDuetFromDictionary(_ v: Dictionary<String,Any>) -> CelebrityDuet {
         let celebrityDuet = CelebrityDuet(
-            firstCelebrity: buildCelebrityFromDictionary(v["first"] as! Dictionary),
-            secondCelebrity: buildCelebrityFromDictionary(v["second"] as! Dictionary)
+            firstCelebrity: buildOneCelebrityFromDictionary(v["first"] as! Dictionary),
+            secondCelebrity: buildOneCelebrityFromDictionary(v["second"] as! Dictionary)
         )
         return celebrityDuet
     }
     
-    private func buildCelebrityFromDictionary(_ v: Dictionary<String,Any>) -> Celebrity {
+    private func buildOneCelebrityFromDictionary(_ v: Dictionary<String,Any>) -> Celebrity {
         let celebrity = Celebrity(
             id: v["id"] as! String,
             displayName: v["display_name"] as! String,
