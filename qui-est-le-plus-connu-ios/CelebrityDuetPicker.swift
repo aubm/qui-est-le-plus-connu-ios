@@ -8,44 +8,40 @@
 
 import Foundation
 import FirebaseDatabase
+import RxSwift
 
 let DUETS_NODE_NAME = "duets"
 
 protocol CelebrityDuetPicker {
-    func pickRandomCelebrityDuet(_ callback: @escaping (CelebrityDuet?) -> Void, onError: @escaping (Error) -> Void)
+    func pickRandomCelebrityDuet() -> Observable<CelebrityDuet?>
 }
 
 class FirebaseCelebrityDuetPicker: CelebrityDuetPicker {
     
     let databaseReference: FIRDatabaseReference
-    var pickRandomCelebrityDuetCallback: ((CelebrityDuet?) -> Void)!
-    
     
     init(databaseReference: FIRDatabaseReference) {
         self.databaseReference = databaseReference
     }
     
-    func pickRandomCelebrityDuet(_ callback: @escaping (CelebrityDuet?) -> Void, onError: @escaping (Error) -> Void) {
-        pickRandomCelebrityDuetCallback = callback
-        
-        guard let unvotedCelebrityDuetIndex = newRandomUnvotedCelebrityDuetIndex() else {
-            pickRandomCelebrityDuetCallback(nil)
-            return
+    func pickRandomCelebrityDuet() -> Observable<CelebrityDuet?> {
+        return Observable<CelebrityDuet?>.create { observer in
+            if let unvotedCelebrityDuetIndex = self.newRandomUnvotedCelebrityDuetIndex() {
+                self.getOneCelebrityDuetFromDatabase(
+                    withIndex: unvotedCelebrityDuetIndex,
+                    onSuccess: { celebrityDuetData in observer.onNext(self.buildCelebrityDuetFromDictionary(celebrityDuetData)) },
+                    onError: { error in observer.onError(error)})
+            } else {
+                observer.onNext(nil)
+            }
+            
+            return Disposables.create()
         }
-        
-        getOneCelebrityDuetFromDatabase(
-            withIndex: unvotedCelebrityDuetIndex,
-            onSuccess: provideCelebrityDuetToCaller,
-            onError: onError)
     }
     
     private func newRandomUnvotedCelebrityDuetIndex() -> String? {
         let randomNum = arc4random_uniform(6)
         return String(randomNum)
-    }
-    
-    private func provideCelebrityDuetToCaller(celebrityDuetData: Dictionary<String, Any>) {
-        pickRandomCelebrityDuetCallback(buildCelebrityDuetFromDictionary(celebrityDuetData))
     }
     
     private func getOneCelebrityDuetFromDatabase(withIndex: String, onSuccess: @escaping (Dictionary<String, Any>) -> Void, onError: @escaping (Error) -> Void) {

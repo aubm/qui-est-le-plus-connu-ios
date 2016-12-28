@@ -24,10 +24,20 @@ class CelebrityDuetViewController: UIViewController {
     }
     
     func pickNextCelebrityDuet() {
-        celebrityDuetPicker.pickRandomCelebrityDuet(
-            {celebrityDuet in self.updateViewWithCelebrityDuet(celebrityDuet!) },
-            onError: {error in print(error.localizedDescription)}
-        )
+        _ = celebrityDuetPicker.pickRandomCelebrityDuet()
+            .subscribe(onNext: self.onNextCelebrityDuet, onError: self.handlePickCelebrityDuetError)
+    }
+    
+    private func onNextCelebrityDuet(_ celebrityDuet: CelebrityDuet?) {
+        if let duet = celebrityDuet {
+            self.updateViewWithCelebrityDuet(duet)
+        } else {
+            print("No more duets")
+        }
+    }
+    
+    private func handlePickCelebrityDuetError(error: Error) {
+        print(error)
     }
     
     private func updateViewWithCelebrityDuet(_ celebrityDuet: CelebrityDuet) {
