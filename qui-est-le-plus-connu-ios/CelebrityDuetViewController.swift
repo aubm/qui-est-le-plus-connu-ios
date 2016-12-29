@@ -23,14 +23,14 @@ class CelebrityDuetViewController: UIViewController {
         pickNextCelebrityDuet()
     }
     
-    func pickNextCelebrityDuet() {
+    private func pickNextCelebrityDuet() {
         _ = celebrityDuetPicker.pickRandomCelebrityDuet()
-            .subscribe(onNext: self.onNextCelebrityDuet, onError: self.handlePickCelebrityDuetError)
+            .subscribe(onNext: onNextCelebrityDuet, onError: handlePickCelebrityDuetError)
     }
     
     private func onNextCelebrityDuet(_ celebrityDuet: CelebrityDuet?) {
         if let duet = celebrityDuet {
-            self.updateViewWithCelebrityDuet(duet)
+            updateViewWithCelebrityDuet(duet)
         } else {
             print("No more duets")
         }

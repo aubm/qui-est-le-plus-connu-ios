@@ -25,17 +25,9 @@ class FirebaseCelebrityDuetPicker: CelebrityDuetPicker {
     }
     
     func pickRandomCelebrityDuet() -> Observable<CelebrityDuet?> {
-        return Observable<CelebrityDuet?>.create { observer in
-            if let unvotedCelebrityDuetIndex = self.newRandomUnvotedCelebrityDuetIndex() {
-                self.getOneCelebrityDuetFromDatabase(
-                    withIndex: unvotedCelebrityDuetIndex,
-                    onSuccess: { celebrityDuetData in observer.onNext(self.buildCelebrityDuetFromDictionary(celebrityDuetData)) },
-                    onError: { error in observer.onError(error)})
-            } else {
-                observer.onNext(nil)
-            }
-            
-            return Disposables.create()
+        let unvotedCelebrityDuetIndex = newRandomUnvotedCelebrityDuetIndex()
+        return getOneCelebrityDuetDataFromDatabase(withIndex: unvotedCelebrityDuetIndex)
+            .map { celebrityDuetData in return self.buildCelebrityDuetFromDictionary(celebrityDuetData)
         }
     }
     
@@ -44,18 +36,26 @@ class FirebaseCelebrityDuetPicker: CelebrityDuetPicker {
         return String(randomNum)
     }
     
-    private func getOneCelebrityDuetFromDatabase(withIndex: String, onSuccess: @escaping (Dictionary<String, Any>) -> Void, onError: @escaping (Error) -> Void) {
-        databaseReference.child(DUETS_NODE_NAME).child(withIndex).observeSingleEvent(of: .value, with: { snapshot in
-            onSuccess(snapshot.value as! Dictionary)
-        }) { error in
-            onError(error)
+    private func getOneCelebrityDuetDataFromDatabase(withIndex: String?) -> Observable<Dictionary<String, Any>?> {
+        return Observable<Dictionary<String, Any>?>.create { observer in
+            if let index = withIndex {
+                self.databaseReference.child(DUETS_NODE_NAME).child(index)
+                    .observeSingleEvent(of: .value, with: { snapshot in observer.onNext(snapshot.value as? Dictionary) })
+                    { error in observer.onError(error) }
+            } else {
+                observer.onNext(nil)
+            }
+            return Disposables.create()
         }
     }
     
-    private func buildCelebrityDuetFromDictionary(_ v: Dictionary<String,Any>) -> CelebrityDuet {
+    private func buildCelebrityDuetFromDictionary(_ v: Dictionary<String,Any>?) -> CelebrityDuet? {
+        guard let data = v else {
+            return nil
+        }
         let celebrityDuet = CelebrityDuet(
-            firstCelebrity: buildOneCelebrityFromDictionary(v["first"] as! Dictionary),
-            secondCelebrity: buildOneCelebrityFromDictionary(v["second"] as! Dictionary)
+            firstCelebrity: buildOneCelebrityFromDictionary(data["first"] as! Dictionary),
+            secondCelebrity: buildOneCelebrityFromDictionary(data["second"] as! Dictionary)
         )
         return celebrityDuet
     }
