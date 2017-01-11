@@ -25,22 +25,44 @@ class FirebaseCelebrityDuetPicker: CelebrityDuetPicker {
     }
     
     func pickRandomCelebrityDuet() -> Observable<CelebrityDuet?> {
-        let unvotedCelebrityDuetIndex = newRandomUnvotedCelebrityDuetIndex()
-        return getOneCelebrityDuetDataFromDatabase(withIndex: unvotedCelebrityDuetIndex)
-            .map { celebrityDuetData in return self.buildCelebrityDuetFromDictionary(celebrityDuetData)
+        return getUnvotedIndexes()
+            .map(selectOneRandomIndexFromUnvotedIndexList)
+            .flatMap(getOneCelebrityDuetData)
+            .map(buildCelebrityDuetFromData)
+    }
+    
+    private func getUnvotedIndexes() -> Observable<[Int]> {
+        return Observable.zip(getNumberOfCelebrityDuets(), getUserVotedIndexes()) { (numberOfCelebrityDuets, userVotedIndexes) in
+            // TODO: implement
+            return [0, 1, 2, 3, 5, 6]
         }
     }
     
-    private func newRandomUnvotedCelebrityDuetIndex() -> String? {
-        let randomNum = arc4random_uniform(6)
-        return String(randomNum)
+    private func getNumberOfCelebrityDuets() -> Observable<Int> {
+        // TODO: implement
+        return Observable.just(6)
     }
     
-    private func getOneCelebrityDuetDataFromDatabase(withIndex: String?) -> Observable<Dictionary<String, Any>?> {
-        return Observable<Dictionary<String, Any>?>.create { observer in
+    private func getUserVotedIndexes() -> Observable<[Int]> {
+        // TODO: implement
+        return Observable.just([])
+    }
+    
+    private func selectOneRandomIndexFromUnvotedIndexList(_ unvotedIndexes: [Int]) -> String? {
+        if  unvotedIndexes.count  == 0 {
+            return nil
+        }
+        let i = Int(arc4random_uniform(UInt32(unvotedIndexes.count)))
+        return String(unvotedIndexes[i])
+    }
+    
+    private func getOneCelebrityDuetData(_ withIndex: String?) -> Observable<Dictionary<String,Any>?> {
+        return Observable<Dictionary<String,Any>?>.create { observer in
             if let index = withIndex {
                 self.databaseReference.child(DUETS_NODE_NAME).child(index)
-                    .observeSingleEvent(of: .value, with: { snapshot in observer.onNext(snapshot.value as? Dictionary) })
+                    .observeSingleEvent(of: .value, with: { snapshot in
+                        observer.onNext(snapshot.value as? Dictionary)
+                    })
                     { error in observer.onError(error) }
             } else {
                 observer.onNext(nil)
@@ -49,7 +71,7 @@ class FirebaseCelebrityDuetPicker: CelebrityDuetPicker {
         }
     }
     
-    private func buildCelebrityDuetFromDictionary(_ v: Dictionary<String,Any>?) -> CelebrityDuet? {
+    private func buildCelebrityDuetFromData(_ v: Dictionary<String,Any>?) -> CelebrityDuet? {
         guard let data = v else {
             return nil
         }
