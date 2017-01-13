@@ -8,6 +8,8 @@ target 'qui-est-le-plus-connu-ios' do
   # Pods for qui-est-le-plus-connu-ios
   pod 'Firebase/Core'
   pod 'Firebase/Database'
+  pod 'Firebase/Auth'
+  pod 'GoogleSignIn'
   pod 'Swinject', '2.0.0-beta.2'
   pod 'SwinjectStoryboard', '1.0.0-beta.2'
   pod 'RxSwift',    '~> 3.0'
