@@ -11,6 +11,10 @@
 		032090BC1E06C61200C13C5A /* SwinjectStoryboard+Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032090BB1E06C61200C13C5A /* SwinjectStoryboard+Setup.swift */; };
 		032090BE1E06C8CF00C13C5A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 032090BD1E06C8CF00C13C5A /* GoogleService-Info.plist */; };
 		032090C01E06CEF900C13C5A /* CelebrityDuet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032090BF1E06CEF900C13C5A /* CelebrityDuet.swift */; };
+		03ED6D921E28F171007EB23B /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03ED6D911E28F171007EB23B /* SignInViewController.swift */; };
+		03ED6D941E2992BA007EB23B /* AppDelegate+GoogleSignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03ED6D931E2992BA007EB23B /* AppDelegate+GoogleSignIn.swift */; };
+		03ED6D981E2A3ACC007EB23B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03ED6D971E2A3ACC007EB23B /* Constants.swift */; };
+		03ED6D9A1E2A40DD007EB23B /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03ED6D991E2A40DD007EB23B /* ErrorHandler.swift */; };
 		03FD48C81DBB894000A6A388 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FD48C71DBB894000A6A388 /* AppDelegate.swift */; };
 		03FD48CA1DBB894000A6A388 /* CelebrityDuetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FD48C91DBB894000A6A388 /* CelebrityDuetViewController.swift */; };
 		03FD48CD1DBB894000A6A388 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03FD48CB1DBB894000A6A388 /* Main.storyboard */; };
@@ -46,6 +50,10 @@
 		032090BB1E06C61200C13C5A /* SwinjectStoryboard+Setup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwinjectStoryboard+Setup.swift"; sourceTree = "<group>"; };
 		032090BD1E06C8CF00C13C5A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		032090BF1E06CEF900C13C5A /* CelebrityDuet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CelebrityDuet.swift; sourceTree = "<group>"; };
+		03ED6D911E28F171007EB23B /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		03ED6D931E2992BA007EB23B /* AppDelegate+GoogleSignIn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AppDelegate+GoogleSignIn.swift"; sourceTree = "<group>"; };
+		03ED6D971E2A3ACC007EB23B /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		03ED6D991E2A40DD007EB23B /* ErrorHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorHandler.swift; sourceTree = "<group>"; };
 		03FD48C41DBB894000A6A388 /* qui-est-le-plus-connu-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "qui-est-le-plus-connu-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		03FD48C71DBB894000A6A388 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		03FD48C91DBB894000A6A388 /* CelebrityDuetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CelebrityDuetViewController.swift; sourceTree = "<group>"; };
@@ -109,6 +117,35 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		03ED6D951E2A39C6007EB23B /* CelebrityDuets */ = {
+			isa = PBXGroup;
+			children = (
+				03FD48C91DBB894000A6A388 /* CelebrityDuetViewController.swift */,
+				032090B71E06B92D00C13C5A /* CelebrityDuetPicker.swift */,
+				032090BF1E06CEF900C13C5A /* CelebrityDuet.swift */,
+			);
+			name = CelebrityDuets;
+			sourceTree = "<group>";
+		};
+		03ED6D961E2A39DC007EB23B /* SignIn */ = {
+			isa = PBXGroup;
+			children = (
+				03ED6D931E2992BA007EB23B /* AppDelegate+GoogleSignIn.swift */,
+				03ED6D911E28F171007EB23B /* SignInViewController.swift */,
+			);
+			name = SignIn;
+			sourceTree = "<group>";
+		};
+		03ED6D9B1E2A40EB007EB23B /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				032090BB1E06C61200C13C5A /* SwinjectStoryboard+Setup.swift */,
+				03ED6D971E2A3ACC007EB23B /* Constants.swift */,
+				03ED6D991E2A40DD007EB23B /* ErrorHandler.swift */,
+			);
+			name = Shared;
+			sourceTree = "<group>";
+		};
 		03FD48BB1DBB894000A6A388 = {
 			isa = PBXGroup;
 			children = (
@@ -134,12 +171,11 @@
 		03FD48C61DBB894000A6A388 /* qui-est-le-plus-connu-ios */ = {
 			isa = PBXGroup;
 			children = (
-				032090BB1E06C61200C13C5A /* SwinjectStoryboard+Setup.swift */,
 				03FD48C71DBB894000A6A388 /* AppDelegate.swift */,
-				03FD48C91DBB894000A6A388 /* CelebrityDuetViewController.swift */,
+				03ED6D9B1E2A40EB007EB23B /* Shared */,
+				03ED6D961E2A39DC007EB23B /* SignIn */,
+				03ED6D951E2A39C6007EB23B /* CelebrityDuets */,
 				032090B61E05B50C00C13C5A /* Supporting Files */,
-				032090B71E06B92D00C13C5A /* CelebrityDuetPicker.swift */,
-				032090BF1E06CEF900C13C5A /* CelebrityDuet.swift */,
 			);
 			path = "qui-est-le-plus-connu-ios";
 			sourceTree = "<group>";
@@ -470,11 +506,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03ED6D941E2992BA007EB23B /* AppDelegate+GoogleSignIn.swift in Sources */,
+				03ED6D921E28F171007EB23B /* SignInViewController.swift in Sources */,
 				03FD48CA1DBB894000A6A388 /* CelebrityDuetViewController.swift in Sources */,
 				032090BC1E06C61200C13C5A /* SwinjectStoryboard+Setup.swift in Sources */,
 				03FD48C81DBB894000A6A388 /* AppDelegate.swift in Sources */,
 				032090C01E06CEF900C13C5A /* CelebrityDuet.swift in Sources */,
+				03ED6D9A1E2A40DD007EB23B /* ErrorHandler.swift in Sources */,
 				032090B81E06B92D00C13C5A /* CelebrityDuetPicker.swift in Sources */,
+				03ED6D981E2A3ACC007EB23B /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

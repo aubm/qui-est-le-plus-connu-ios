@@ -11,6 +11,7 @@ import UIKit
 class CelebrityDuetViewController: UIViewController {
     
     var celebrityDuetPicker: CelebrityDuetPicker!
+    var errorHandler: ErrorHandler!
     var celebrityDuet: CelebrityDuet?
     
     @IBOutlet weak var firstCelebrityNameLabel: UILabel!
@@ -37,7 +38,7 @@ class CelebrityDuetViewController: UIViewController {
     }
     
     private func handlePickCelebrityDuetError(error: Error) {
-        print(error)
+        errorHandler.handle(error)
     }
     
     private func updateViewWithCelebrityDuet(_ celebrityDuet: CelebrityDuet) {
