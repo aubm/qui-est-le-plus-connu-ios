@@ -11,6 +11,7 @@ import FirebaseDatabase
 import RxSwift
 
 let DUETS_NODE_NAME = "duets"
+let TOTAL_DUETS_NODE_NAME = "total_duets"
 
 protocol CelebrityDuetPicker {
     func pickRandomCelebrityDuet() -> Observable<CelebrityDuet?>
@@ -33,14 +34,22 @@ class FirebaseCelebrityDuetPicker: CelebrityDuetPicker {
     
     private func getUnvotedIndexes() -> Observable<[Int]> {
         return Observable.zip(getNumberOfCelebrityDuets(), getUserVotedIndexes()) { (numberOfCelebrityDuets, userVotedIndexes) in
-            // TODO: implement
-            return [0, 1, 2, 3, 5, 6]
+            let votedIndexes = Set(userVotedIndexes)
+            var indexes = Set(0...numberOfCelebrityDuets-1)
+            indexes.subtract(votedIndexes)
+            return indexes.sorted()
         }
     }
     
     private func getNumberOfCelebrityDuets() -> Observable<Int> {
-        // TODO: implement
-        return Observable.just(6)
+        return Observable<Int>.create { observer in
+            self.databaseReference.child(TOTAL_DUETS_NODE_NAME)
+                .observeSingleEvent(of: .value, with: { snapshot in
+                    observer.onNext(snapshot.value as! Int)
+                })
+                { error in observer.onError(error) }
+            return Disposables.create()
+        }
     }
     
     private func getUserVotedIndexes() -> Observable<[Int]> {
