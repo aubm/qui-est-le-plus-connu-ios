@@ -16,6 +16,7 @@ extension SwinjectStoryboard {
         configureFirebase()
         configureSignIn()
         configureCelebrityDuet()
+        configureUserProfile()
     }
     
     private class func configureErrors() {
@@ -73,6 +74,14 @@ extension SwinjectStoryboard {
             FirebaseCelebrityDuetPicker(
                 databaseReference: r.resolve(FIRDatabaseReference.self)!
             )
+        }
+    }
+    
+    private class func configureUserProfile() {
+        defaultContainer.registerForStoryboard(UserProfileViewController.self) { r, c in
+            c.firebaseAuth = r.resolve(FIRAuth.self)
+            c.googleSignIn = r.resolve(GIDSignIn.self)
+            c.errorHandler = r.resolve(ErrorHandler.self)
         }
     }
 }
