@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Celebrity Duet View Controller-->
+        <!--Celebrity Duet-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="CelebrityDuetViewController" customModule="qui_est_le_plus_connu_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Celebrity Duet" id="BYZ-38-t0r" customClass="CelebrityDuetViewController" customModule="qui_est_le_plus_connu_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -38,6 +38,7 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Duos" id="gxk-JK-m5i"/>
                     <connections>
                         <outlet property="firstCelebrityNameLabel" destination="BEp-e7-ZRz" id="cow-og-GXA"/>
                         <outlet property="secondCelebrityNameLabel" destination="Tji-tV-lGh" id="OSq-tl-SBn"/>
@@ -45,7 +46,57 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1098" y="60"/>
+            <point key="canvasLocation" x="-418" y="-105"/>
+        </scene>
+        <!--User Profile-->
+        <scene sceneID="yZG-G6-Ph7">
+            <objects>
+                <viewController title="User Profile" id="zmJ-So-Eig" customClass="UserProfileViewController" customModule="qui_est_le_plus_connu_ios" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="XAq-ta-TJ9"/>
+                        <viewControllerLayoutGuide type="bottom" id="Rvy-Nz-jLA"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="rVh-5o-mXx">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I1Q-7W-4jT">
+                                <rect key="frame" x="114" y="311" width="146" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Se déconnecter"/>
+                                <connections>
+                                    <action selector="didPressedSignOut:" destination="zmJ-So-Eig" eventType="touchUpInside" id="626-fR-fhh"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Profil" id="mxR-CA-wxt"/>
+                    <connections>
+                        <segue destination="k2x-Y5-O0L" kind="showDetail" identifier="UserProfileToSignIn" id="Da6-hW-W2N"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="c7x-84-Xt7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-418.39999999999998" y="567.16641679160421"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="E76-Ks-Gd0">
+            <objects>
+                <tabBarController id="DyA-KU-Ehj" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="2Nm-Al-xmz">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="55A-vm-Y70"/>
+                        <segue destination="zmJ-So-Eig" kind="relationship" relationship="viewControllers" id="7G6-VQ-KO8"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JhY-I1-VzG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1236" y="224"/>
         </scene>
         <!--Sign In View Controller-->
         <scene sceneID="lzE-lC-JnG">
@@ -69,12 +120,12 @@
                     </view>
                     <connections>
                         <outlet property="signInButton" destination="17d-e6-dqI" id="xAN-0V-IZY"/>
-                        <segue destination="BYZ-38-t0r" kind="showDetail" identifier="SignInToCelebrityDuet" action="showViewController:sender:" id="vmr-pL-Qfd"/>
+                        <segue destination="DyA-KU-Ehj" kind="showDetail" identifier="SignInToCelebrityDuet" id="Rtr-0Y-Kqo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jxE-TI-pLX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="79" y="60"/>
+            <point key="canvasLocation" x="-2065" y="234"/>
         </scene>
     </scenes>
 </document>

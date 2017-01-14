@@ -11,5 +11,6 @@ import Foundation
 struct Constants {
     struct Segues {
         static let AfterSignIn = "SignInToCelebrityDuet"
+        static let AfterSignOut = "UserProfileToSignIn"
     }
 }
