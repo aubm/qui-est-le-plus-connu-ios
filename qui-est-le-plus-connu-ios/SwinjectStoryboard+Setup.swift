@@ -60,11 +60,13 @@ extension SwinjectStoryboard {
     private class func configureCelebrityDuet() {
         configureCelebrityDuetViewController()
         configureCelebrityDuetPicker()
+        configureCelebrityDuetVoter()
     }
     
     private class func configureCelebrityDuetViewController() {
         defaultContainer.registerForStoryboard(CelebrityDuetViewController.self) { r, c in
             c.celebrityDuetPicker = r.resolve(CelebrityDuetPicker.self)
+            c.celebrityDuetVoter = r.resolve(CelebrityDuetVoter.self)
             c.errorHandler = r.resolve(ErrorHandler.self)
         }
     }
@@ -72,6 +74,14 @@ extension SwinjectStoryboard {
     private class func configureCelebrityDuetPicker() {
         defaultContainer.register(CelebrityDuetPicker.self) { r in
             FirebaseCelebrityDuetPicker(
+                databaseReference: r.resolve(FIRDatabaseReference.self)!
+            )
+        }
+    }
+    
+    private class func configureCelebrityDuetVoter() {
+        defaultContainer.register(CelebrityDuetVoter.self) { r in
+            CelebrityDuetVoter(
                 databaseReference: r.resolve(FIRDatabaseReference.self)!
             )
         }

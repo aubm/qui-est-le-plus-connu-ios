@@ -9,6 +9,7 @@
 import Foundation
 
 struct CelebrityDuet {
+    var index: String
     var firstCelebrity: Celebrity
     var secondCelebrity: Celebrity
 }

@@ -70,7 +70,9 @@ class FirebaseCelebrityDuetPicker: CelebrityDuetPicker {
             if let index = withIndex {
                 self.databaseReference.child(DUETS_NODE_NAME).child(index)
                     .observeSingleEvent(of: .value, with: { snapshot in
-                        observer.onNext(snapshot.value as? Dictionary)
+                        var value = snapshot.value as? Dictionary<String,Any>
+                        value?["index"] = index
+                        observer.onNext(value)
                     })
                     { error in observer.onError(error) }
             } else {
@@ -85,6 +87,7 @@ class FirebaseCelebrityDuetPicker: CelebrityDuetPicker {
             return nil
         }
         let celebrityDuet = CelebrityDuet(
+            index:  data["index"] as! String,
             firstCelebrity: buildOneCelebrityFromDictionary(data["first"] as! Dictionary),
             secondCelebrity: buildOneCelebrityFromDictionary(data["second"] as! Dictionary)
         )
@@ -95,7 +98,7 @@ class FirebaseCelebrityDuetPicker: CelebrityDuetPicker {
         let celebrity = Celebrity(
             id: v["id"] as! String,
             displayName: v["display_name"] as! String,
-            votes: v["votes"] as! Int
+            votes: v["votes"] as? Int ?? 0
         )
         return celebrity
     }

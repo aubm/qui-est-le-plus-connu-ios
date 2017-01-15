@@ -14,6 +14,7 @@ target 'qui-est-le-plus-connu-ios' do
   pod 'SwinjectStoryboard', '1.0.0-beta.2'
   pod 'RxSwift',    '~> 3.0'
   pod 'RxCocoa',    '~> 3.0'
+  pod 'Charts'
 
   target 'qui-est-le-plus-connu-iosTests' do
     inherit! :search_paths
