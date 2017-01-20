@@ -15,6 +15,7 @@ extension SwinjectStoryboard {
         configureErrors()
         configureFirebase()
         configureSignIn()
+        configureStorage()
         configureCelebrityDuet()
         configureUserProfile()
     }
@@ -31,15 +32,26 @@ extension SwinjectStoryboard {
     
     private class func configureFirebase() {
         FIRApp.configure()
-        defaultContainer.register(FIRDatabaseReference.self) { r in
-            FIRDatabase.database().reference()
-        }
+        configureFirebaseDatabase()
+        configureFirebaseAuth()
+        configureFirebaseStorage()
+    }
+    
+    private class func configureFirebaseDatabase() {
+        defaultContainer.register(FIRDatabaseReference.self) { r in FIRDatabase.database().reference() }
+    }
+    
+    private class func configureFirebaseAuth() {
+        defaultContainer.register(FIRAuth.self) { r in FIRAuth.auth()! }
+    }
+    
+    private class func configureFirebaseStorage() {
+        defaultContainer.register(FIRStorageReference.self) { r in FIRStorage.storage().reference() }
     }
     
     private class func configureSignIn() {
         configureSignInViewController()
         configureGoogleSignIn()
-        configureFirebaseAuth()
     }
     
     private class func configureSignInViewController() {
@@ -53,8 +65,12 @@ extension SwinjectStoryboard {
         defaultContainer.register(GIDSignIn.self) { r in GIDSignIn.sharedInstance() }
     }
     
-    private class func configureFirebaseAuth() {
-        defaultContainer.register(FIRAuth.self) { r in FIRAuth.auth()! }
+    private class func configureStorage() {
+        defaultContainer.register(Storage.self) { r in
+            Storage(
+                storageRef: r.resolve(FIRStorageReference.self)!
+            )
+        }
     }
     
     private class func configureCelebrityDuet() {
@@ -66,6 +82,7 @@ extension SwinjectStoryboard {
         defaultContainer.registerForStoryboard(CelebrityDuetViewController.self) { r, c in
             c.celebrityDuetPicker = r.resolve(CelebrityDuetPicker.self)
             c.errorHandler = r.resolve(ErrorHandler.self)
+            c.storage = r.resolve(Storage.self)
         }
     }
     

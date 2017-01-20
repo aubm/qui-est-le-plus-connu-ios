@@ -22,31 +22,41 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BEp-e7-ZRz">
-                                <rect key="frame" x="16" y="120" width="146" height="102"/>
+                                <rect key="frame" x="16" y="282" width="146" height="102"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tji-tV-lGh">
-                                <rect key="frame" x="193" y="120" width="166" height="102"/>
+                                <rect key="frame" x="193" y="282" width="166" height="102"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DyX-oZ-cQJ">
+                                <rect key="frame" x="16" y="61" width="164" height="147"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="M9y-GP-IE9">
+                                <rect key="frame" x="193" y="61" width="166" height="147"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Duos" id="gxk-JK-m5i"/>
                     <connections>
+                        <outlet property="firstCelebrityImageView" destination="DyX-oZ-cQJ" id="N3L-ED-aAy"/>
                         <outlet property="firstCelebrityNameLabel" destination="BEp-e7-ZRz" id="cow-og-GXA"/>
+                        <outlet property="secondCelebrityImageView" destination="M9y-GP-IE9" id="gMT-fc-HoH"/>
                         <outlet property="secondCelebrityNameLabel" destination="Tji-tV-lGh" id="OSq-tl-SBn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-418" y="-105"/>
+            <point key="canvasLocation" x="-418.39999999999998" y="-105.69715142428787"/>
         </scene>
         <!--User Profile-->
         <scene sceneID="yZG-G6-Ph7">

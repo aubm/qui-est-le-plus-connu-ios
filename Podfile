@@ -9,6 +9,7 @@ target 'qui-est-le-plus-connu-ios' do
   pod 'Firebase/Core'
   pod 'Firebase/Database'
   pod 'Firebase/Auth'
+  pod 'Firebase/Storage'
   pod 'GoogleSignIn'
   pod 'Swinject', '2.0.0-beta.2'
   pod 'SwinjectStoryboard', '1.0.0-beta.2'

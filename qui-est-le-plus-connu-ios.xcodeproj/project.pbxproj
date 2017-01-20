@@ -11,6 +11,7 @@
 		032090BC1E06C61200C13C5A /* SwinjectStoryboard+Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032090BB1E06C61200C13C5A /* SwinjectStoryboard+Setup.swift */; };
 		032090BE1E06C8CF00C13C5A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 032090BD1E06C8CF00C13C5A /* GoogleService-Info.plist */; };
 		032090C01E06CEF900C13C5A /* CelebrityDuet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032090BF1E06CEF900C13C5A /* CelebrityDuet.swift */; };
+		03449ED71E3370C40046B411 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03449ED61E3370C40046B411 /* Storage.swift */; };
 		03ED6D921E28F171007EB23B /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03ED6D911E28F171007EB23B /* SignInViewController.swift */; };
 		03ED6D941E2992BA007EB23B /* AppDelegate+GoogleSignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03ED6D931E2992BA007EB23B /* AppDelegate+GoogleSignIn.swift */; };
 		03ED6D981E2A3ACC007EB23B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03ED6D971E2A3ACC007EB23B /* Constants.swift */; };
@@ -51,6 +52,7 @@
 		032090BB1E06C61200C13C5A /* SwinjectStoryboard+Setup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwinjectStoryboard+Setup.swift"; sourceTree = "<group>"; };
 		032090BD1E06C8CF00C13C5A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		032090BF1E06CEF900C13C5A /* CelebrityDuet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CelebrityDuet.swift; sourceTree = "<group>"; };
+		03449ED61E3370C40046B411 /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		03ED6D911E28F171007EB23B /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		03ED6D931E2992BA007EB23B /* AppDelegate+GoogleSignIn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AppDelegate+GoogleSignIn.swift"; sourceTree = "<group>"; };
 		03ED6D971E2A3ACC007EB23B /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 				032090BB1E06C61200C13C5A /* SwinjectStoryboard+Setup.swift */,
 				03ED6D971E2A3ACC007EB23B /* Constants.swift */,
 				03ED6D991E2A40DD007EB23B /* ErrorHandler.swift */,
+				03449ED61E3370C40046B411 /* Storage.swift */,
 			);
 			name = Shared;
 			sourceTree = "<group>";
@@ -518,6 +521,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				03ED6D941E2992BA007EB23B /* AppDelegate+GoogleSignIn.swift in Sources */,
+				03449ED71E3370C40046B411 /* Storage.swift in Sources */,
 				03ED6D9D1E2A4CB0007EB23B /* UserProfileViewController.swift in Sources */,
 				03ED6D921E28F171007EB23B /* SignInViewController.swift in Sources */,
 				03FD48CA1DBB894000A6A388 /* CelebrityDuetViewController.swift in Sources */,
