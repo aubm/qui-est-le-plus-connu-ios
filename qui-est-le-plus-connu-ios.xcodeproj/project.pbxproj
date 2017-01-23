@@ -306,6 +306,9 @@
 		03FD48BC1DBB894000A6A388 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				KnownAssetTags = (
+					qaaaa,
+				);
 				LastSwiftUpdateCheck = 0800;
 				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Aurélien Baumann";
